@@ -22,11 +22,7 @@ int main () {
 		std::vector<uint8_t> bytes = {49,50,51,52,53,54,55,56,57};
 		long result = calculator.Calc(bytes);
 
-		intUnion iu;
-		iu.i64[0] = result;
-		std::vector<uint8_t> res(&iu.i8[0],&iu.i8[8]);
-		std::reverse(res.begin(),res.end());
-		std::cout<< std::hex << result << " : " << HexToStr(res) << ((result==algo.Check)?" Ok":" Not Ok!") <<std::endl;
+		std::cout<< std::hex << result << ((result==algo.Check)?" Ok":" Not Ok!") <<std::endl;
 	}
 }
 ```
