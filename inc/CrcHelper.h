@@ -1,10 +1,12 @@
-package com.crccalc;
+//package com.crccalc;
+#ifndef _CrcHelper_H_
+#define _CrcHelper_H_
 
 /**
  * Created by anthony on 13.05.2017.
  */
-public class CrcHelper {
-
+class CrcHelper {
+	public:
     static long ReverseBits(long ul, int valueLength)
     {
         long newValue = 0;
@@ -17,4 +19,6 @@ public class CrcHelper {
 
         return newValue;
     }
-}
+};
+
+#endif //_CrcHelper_H_

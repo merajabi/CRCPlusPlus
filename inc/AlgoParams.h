@@ -1,12 +1,15 @@
-package com.crccalc;
+//package com.crccalc;
+#ifndef _AlgoParams_H_
+#define _AlgoParams_H_
 
 /**
  * Created by anthony on 11.05.2017.
  */
-    public class AlgoParams
+    class AlgoParams
     {
 
-    public AlgoParams(String name, int hashSize, long poly, long init, boolean refIn, boolean refOut, long xorOut, long check)
+    public:
+	AlgoParams(std::string name, int hashSize, long poly, long init, bool refIn, bool refOut, long xorOut, long check)
     {
         Name = name;
         Check = check;
@@ -27,12 +30,12 @@ package com.crccalc;
     /// ASCII string "123456789" is fed through the specified algorithm
     /// (i.e. 313233... (hexadecimal)).
     /// </summary>
-    public long Check;
+    long Check;
 
     /// <summary>
     /// This is hash size.
     /// </summary>
-    public int HashSize;
+    int HashSize;
 
     /// <summary>
     /// This parameter specifies the initial value of the register
@@ -43,12 +46,12 @@ package com.crccalc;
     /// N'th bit iteration. This parameter should be specified as a
     /// hexadecimal number.
     /// </summary>
-    public long Init;
+    long Init;
 
     /// <summary>
     /// This is a name given to the algorithm. A string value.
     /// </summary>
-    public String Name;
+    std::string Name;
 
     /// <summary>
     /// This parameter is the poly. This is a binary value that
@@ -59,7 +62,7 @@ package com.crccalc;
     /// is always the LSB of the divisor during the division regardless of
     /// whether the algorithm being modelled is reflected.
     /// </summary>
-    public long Poly;
+    long Poly;
 
     /// <summary>
     /// This is a boolean parameter. If it is FALSE, input bytes are
@@ -67,7 +70,7 @@ package com.crccalc;
     /// (MSB) and bit 0 being treated as the least significant bit.If this
     /// parameter is FALSE, each byte is reflected before being processed.
     /// </summary>
-    public boolean RefIn;
+    bool RefIn;
 
     /// <summary>
     /// This is a boolean parameter. If it is set to FALSE, the
@@ -75,7 +78,7 @@ package com.crccalc;
     /// otherwise, if this parameter is TRUE, the final register value is
     /// reflected first.
     /// </summary>
-    public boolean RefOut;
+    bool RefOut;
 
     /// <summary>
     /// This is an W-bit value that should be specified as a
@@ -83,5 +86,8 @@ package com.crccalc;
     /// the REFOUT) stage before the value is returned as the official
     /// checksum.
     /// </summary>
-    public long XorOut;
-}
+    long XorOut;
+};
+
+#endif //_AlgoParams_H_
+

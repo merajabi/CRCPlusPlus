@@ -1,46 +1,48 @@
-package com.crccalc;
-
+//package com.crccalc;
+#ifndef _CrcCalculator_H_
+#define _CrcCalculator_H_
+#include <iostream>
+#include <vector>
 /**
  * Created by anthony on 11.05.2017.
  */
-public class CrcCalculator {
+class CrcCalculator {
+    long _mask = 0xFFFFFFFFFFFFFFFFL;
+    std::vector<long> _table;
+    AlgoParams Parameters;
+    uint8_t HashSize;
 
-    public AlgoParams Parameters;
-    public byte HashSize = 8;
-    private long _mask = 0xFFFFFFFFFFFFFFFFL;
-    private long[] _table = new long[256];
-
-    public static final byte[] TestBytes = new byte[]{49,50,51,52,53,54,55,56,57};
-
-    CrcCalculator(AlgoParams params)
-    {
-        Parameters = params;
-
-        HashSize = (byte) params.HashSize;
+	public:
+    CrcCalculator(const AlgoParams& params):Parameters(params),HashSize(8) {
+		_table.resize(256);
+        HashSize = (uint8_t) Parameters.HashSize;
         if (HashSize < 64)
         {
             _mask = (1L << HashSize) - 1;
         }
-
+		std::cout<< " ok 2" << std::endl;
         CreateTable();
     }
 
-    public long Calc(byte[] data, int offset, int length)
+    long Calc(std::vector<uint8_t>& data, int offset=0, int length=0)
     {
-        long init = Parameters.RefOut ? CrcHelper.ReverseBits(Parameters.Init, HashSize) : Parameters.Init;
+		length = (length<=0)?data.size():length;
+        long init = (Parameters.RefOut) ? CrcHelper::ReverseBits(Parameters.Init, HashSize) : Parameters.Init;
         long hash = ComputeCrc(init, data, offset, length);
         return (hash ^ Parameters.XorOut) & _mask;
     }
 
-    private long ComputeCrc(long init, byte[] data, int offset, int length)
-    {
+	private:
+
+    long ComputeCrc(long init, std::vector<uint8_t>& data, int offset, int length) {
         long crc = init;
 
         if (Parameters.RefOut)
         {
             for (int i = offset; i < offset + length; i++)
             {
-                crc = (_table[(int)((crc ^ data[i]) & 0xFF)] ^ (crc >>> 8));
+				long absCRC=abs(crc);
+                crc = (_table[(int)((crc ^ data[i]) & 0xFF)] ^ (absCRC >> 8)); // crc = (_table[(int)((crc ^ data[i]) & 0xFF)] ^ (absCRC >>> 8));
                 crc &= _mask;
             }
         }
@@ -58,34 +60,38 @@ public class CrcCalculator {
         return crc;
     }
 
-    private void CreateTable()
+    void CreateTable()
     {
-        for (int i = 0; i < _table.length; i++)
+        for (int i = 0; i < _table.size(); i++){
             _table[i] = CreateTableEntry(i);
+		}
     }
 
-    private long CreateTableEntry(int index)
+    long CreateTableEntry(int index)
     {
         long r = (long)index;
-
-        if (Parameters.RefIn)
-            r = CrcHelper.ReverseBits(r, HashSize);
-        else if (HashSize > 8)
+        if (Parameters.RefIn) {
+            r = CrcHelper::ReverseBits(r, HashSize);
+        } else if (HashSize > 8) {
             r <<= (HashSize - 8);
-
+		}
         long lastBit = (1L << (HashSize - 1));
 
         for (int i = 0; i < 8; i++)
         {
-            if ((r & lastBit) != 0)
+            if ((r & lastBit) != 0) {
                 r = ((r << 1) ^ Parameters.Poly);
-            else
+            } else {
                 r <<= 1;
+			}
         }
-
-        if (Parameters.RefOut)
-            r = CrcHelper.ReverseBits(r, HashSize);
-
+        if (Parameters.RefOut) {
+            r = CrcHelper::ReverseBits(r, HashSize);
+		}
         return r & _mask;
     }
-}
+
+};
+
+#endif //_CrcCalculator_H_
+
