@@ -1,6 +1,9 @@
 The MIT License (MIT)
 
-Copyright (c) 2017 Anton Isakov http://crccalc.com
+Copyright (c) 2020 Raha Rajabi 
+
+This software ported from java language to C++ 
+the credit goes to original author Anton Isakov (https://github.com/meetanthony/crcjava)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
