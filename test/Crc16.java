@@ -27,31 +27,4 @@ public class Crc16 {
     public static AlgoParams Crc16Modbus = new AlgoParams("CRC-16/MODBUS", 16, 0x8005, 0xFFFF, true, true, 0x0, 0x4B37);
     public static AlgoParams Crc16X25 = new AlgoParams("CRC-16/X-25", 16, 0x1021, 0xFFFF, true, true, 0xFFFF, 0x906E);
     public static AlgoParams Crc16Xmodem = new AlgoParams("CRC-16/XMODEM", 16, 0x1021, 0x0, false, false, 0x0, 0x31C3);
-
-    public static final AlgoParams[] Params = new AlgoParams[]
-            {
-                    Crc16CcittFalse,
-                    Crc16Arc,
-                    Crc16AugCcitt,
-                    Crc16Buypass,
-                    Crc16Cdma2000,
-                    Crc16Dds110,
-                    Crc16DectR,
-                    Crc16DectX,
-                    Crc16Dnp,
-                    Crc16En13757,
-                    Crc16Genibus,
-                    Crc16Maxim,
-                    Crc16Mcrf4Xx,
-                    Crc16Riello,
-                    Crc16T10Dif,
-                    Crc16Teledisk,
-                    Crc16Tms37157,
-                    Crc16Usb,
-                    CrcA,
-                    Crc16Kermit,
-                    Crc16Modbus,
-                    Crc16X25,
-                    Crc16Xmodem,
-            };
 }

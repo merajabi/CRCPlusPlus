@@ -20,7 +20,6 @@ class CrcCalculator {
         {
             _mask = (1L << HashSize) - 1;
         }
-		std::cout<< " ok 2" << std::endl;
         CreateTable();
     }
 

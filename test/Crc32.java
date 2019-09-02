@@ -13,8 +13,4 @@ public class Crc32 {
     public static AlgoParams Crc32Posix = new AlgoParams("CRC-32/POSIX", 32, 0x04C11DB7L, 0x00000000L, false, false, 0xFFFFFFFFL, 0x765E7680L);
     public static AlgoParams Crc32Q = new AlgoParams("CRC-32Q", 32, 0x814141ABL, 0x00000000L, false, false, 0x00000000L, 0x3010BF7FL);
     public static AlgoParams Crc32Xfer = new AlgoParams("CRC-32/XFER", 32, 0x000000AFL, 0x00000000L, false, false, 0x00000000L, 0xBD0BE338L);
-
-    public static final AlgoParams[] Params = new AlgoParams[]{
-            Crc32, Crc32Bzip2, Crc32C, Crc32D, Crc32Jamcrc, Crc32Mpeg2, Crc32Posix, Crc32Q, Crc32Xfer
-    };
 }
