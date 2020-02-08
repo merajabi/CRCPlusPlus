@@ -3,11 +3,12 @@
 #define _CrcCalculator_H_
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 /**
  * Created by anthony on 11.05.2017.
  */
 class CrcCalculator {
-    long _mask = 0xFFFFFFFFFFFFFFFFL;
+    uint64_t _mask = 0xFFFFFFFFFFFFFFFFL;
     std::vector<long> _table;
     AlgoParams Parameters;
     uint8_t HashSize;
@@ -23,7 +24,7 @@ class CrcCalculator {
         CreateTable();
     }
 
-    long Calc(std::vector<uint8_t>& data, int offset=0, int length=0)
+    long Calc(const std::vector<uint8_t>& data, int offset=0, size_t length=0)
     {
 		length = (length<=0)?data.size():length;
         long init = (Parameters.RefOut) ? CrcHelper::ReverseBits(Parameters.Init, HashSize) : Parameters.Init;
@@ -33,14 +34,14 @@ class CrcCalculator {
 
 	private:
 
-    long ComputeCrc(long init, std::vector<uint8_t>& data, int offset, int length) {
+    long ComputeCrc(long init, const std::vector<uint8_t>& data, int offset, size_t length) {
         long crc = init;
 
         if (Parameters.RefOut)
         {
             for (int i = offset; i < offset + length; i++)
             {
-				long absCRC=abs(crc);
+				long absCRC = labs(crc);
                 crc = (_table[(int)((crc ^ data[i]) & 0xFF)] ^ (absCRC >> 8)); // crc = (_table[(int)((crc ^ data[i]) & 0xFF)] ^ (absCRC >>> 8));
                 crc &= _mask;
             }

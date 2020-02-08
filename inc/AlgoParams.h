@@ -5,11 +5,10 @@
 /**
  * Created by anthony on 11.05.2017.
  */
-    class AlgoParams
-    {
+class AlgoParams {
 
-    public:
-	AlgoParams(std::string name, int hashSize, long poly, long init, bool refIn, bool refOut, long xorOut, long check)
+public:
+	AlgoParams(const std::string& name, int hashSize, uint64_t poly, long init, bool refIn, bool refOut, long xorOut, uint64_t check)
     {
         Name = name;
         Check = check;
@@ -30,7 +29,7 @@
     /// ASCII string "123456789" is fed through the specified algorithm
     /// (i.e. 313233... (hexadecimal)).
     /// </summary>
-    long Check;
+    uint64_t Check;
 
     /// <summary>
     /// This is hash size.
@@ -62,7 +61,7 @@
     /// is always the LSB of the divisor during the division regardless of
     /// whether the algorithm being modelled is reflected.
     /// </summary>
-    long Poly;
+    uint64_t Poly;
 
     /// <summary>
     /// This is a boolean parameter. If it is FALSE, input bytes are
